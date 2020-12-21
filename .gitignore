@@ -1,0 +1,5 @@
+sync-exceptions.custom
+
+# MacOS
+
+.DS_Store
