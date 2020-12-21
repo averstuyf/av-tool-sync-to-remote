@@ -23,14 +23,14 @@ brew install rclone
 
 ### Configure Rclone
 
-- rclone.org
-- rclone.org/drive/ - Google Drive
+- [rclone.org](https://rclone.org)
+- [rclone.org/drive/](https://rclone.org/drive/) - Google Drive
 
 ```sh
 rclone config
 ```
 
-Choose the following options:
+Choose the following options for Google Drive:
 
 - menu option -> new remote
 - name -> gdrive
@@ -49,7 +49,7 @@ Choose the following options:
 ### Run from the command line
 
 ```sh
-./sync-to-cloud.sh <command> <flags>
+./sync-to-remote.sh <command> [flags]
 ```
 
 Use the command `help` to see an overview of available commands and flags.
@@ -67,7 +67,7 @@ git clone --depth 1 https://github.com/averstuyf/av-tool-sync-to-remote.git /Use
 Make a symlink to the [launchd agent config](https://manpagez.com/man/5/launchd.plist/) file in `/Library/LaunchAgents` for all users or `~/Library/LaunchAgents` for a specific user.
 
 ```sh
-ln -s /Users/Shared/av-tool-sync-to-remote/com.av.sync-to-remote.plist /Library/LaunchAgents/com.av.sync-to-remote.plist
+sudo ln -s /Users/Shared/av-tool-sync-to-remote/com.av.sync-to-remote.plist /Library/LaunchAgents/com.av.sync-to-remote.plist
 ```
 
 Have launchd load the agent.
@@ -89,4 +89,4 @@ This repository is [licensed](LICENSE.md) under the permissive MIT License.
 
 ---
 
-All rights reserved (c) 2020 [Arnaud Verstuyf](https://github.com/averstuyf).
+Copyright (c) 2020 [Arnaud Verstuyf](https://github.com/averstuyf).
