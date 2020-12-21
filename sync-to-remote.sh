@@ -35,7 +35,7 @@ showHelp()
     echo "Backup v$VERSION"
     echo 
     echo "Usage:"
-    echo "  $0 [command] [flags]"
+    echo "  $0 <command> [flags]"
     echo
     echo "Available Commands:"
     echo "  backup\tPerform backup"
