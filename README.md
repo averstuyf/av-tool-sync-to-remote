@@ -72,7 +72,6 @@ In the future update the clone, overwriting any local changes.
 cd /Users/Shared/av-tool-sync-to-remote
 git fetch
 git reset --hard origin/master
-git clean -f
 ```
 
 Make a symlink to the [launchd agent config](https://manpagez.com/man/5/launchd.plist/) file in `/Library/LaunchAgents` for all users or `~/Library/LaunchAgents` for a specific user.
