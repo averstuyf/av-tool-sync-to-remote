@@ -74,7 +74,7 @@ perform_backup () {
         # 1. Google Drive supports multiple files with the same name co-existing
         # 2. Rclone sees duplicate files as errors during sync
         /usr/local/bin/rclone dedupe $REMOTE_NAME:$REMOTE_PATH/ --fast-list --dedupe-mode oldest $*
-        /usr/local/bin/rclone sync "$LOCAL_PATH" $REMOTE_NAME:$REMOTE_PATH/ --backup-dir gdrive-backup:REMOTE_PATH-$DATE/ --create-empty-src-dirs --links --stats 10s --transfers 16 --drive-chunk-size 32M --checkers 32 --fast-list --exclude-from $SYNC_EXCEPTIONS_FILENAME --exclude-from $CUSTOM_SYNC_EXCEPTIONS_FILENAME $*
+        /usr/local/bin/rclone sync "$LOCAL_PATH" $REMOTE_NAME:$REMOTE_PATH/ --backup-dir gdrive-backup:$REMOTE_NAME/$REMOTE_PATH-$DATE/ --create-empty-src-dirs --links --stats 10s --transfers 16 --drive-chunk-size 32M --checkers 32 --fast-list --exclude-from $SYNC_EXCEPTIONS_FILENAME --exclude-from $CUSTOM_SYNC_EXCEPTIONS_FILENAME $*
 
         # Exit if rclone returned an error
         #[ $? -ne 0 ] && exit $?
