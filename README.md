@@ -4,7 +4,7 @@ This shell script syncs local folders to a remote storage.
 
 ## Requirements
 
-Tested on MacOS Big Sur. Might work on other releases.
+- Tested on MacOS Big Sur. Might work on other releases.
 
 ## Todo
 
@@ -55,6 +55,8 @@ Choose the following options for Google Drive:
 Use the command `help` to see an overview of available commands and flags.
 
 ### Schedule as a launchd agent
+
+> When the computer is running on battery power, no scheduled sync takes place, unless forced by providing the `backup` command.
 
 Make the project files accessible to all users of a machine by placing it in `/Users/Shared`. For a single user; a more limited location such as ~/Applications can be used.
 
