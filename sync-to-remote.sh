@@ -8,7 +8,8 @@ BACKUPS=(
     applications::$HOME/Applications)
 
 REMOTE_NAME="gdrive-backup"
-SYNC_EXCEPTIONS_CUSTOM_FILENAME="sync-exceptions"
+SYNC_EXCEPTIONS_FILENAME="sync-exceptions-default"
+CUSTOM_SYNC_EXCEPTIONS_FILENAME="sync-exceptions"
 
 DEVICE_NAME=$(scutil --get ComputerName)
 USER_NAME=$USER
@@ -50,7 +51,7 @@ showHelp()
 
 perform_backup () {
     # Make sure the custom exceptions file exists
-    touch $SYNC_EXCEPTIONS_CUSTOM_FILENAME
+    touch $CUSTOM_SYNC_EXCEPTIONS_FILENAME
 
     printf "Backup device - name: %s, user: %s, date: %s\n" "$DEVICE_NAME" "$USER" "$DATE"
     for backup in "${BACKUPS[@]}" ;
@@ -73,7 +74,7 @@ perform_backup () {
         # 1. Google Drive supports multiple files with the same name co-existing
         # 2. Rclone sees duplicate files as errors during sync
         /usr/local/bin/rclone dedupe $REMOTE_NAME:$REMOTE_PATH/ --fast-list --dedupe-mode oldest $*
-        /usr/local/bin/rclone sync "$LOCAL_PATH" $REMOTE_NAME:$REMOTE_PATH/ --backup-dir gdrive-backup:REMOTE_PATH-$DATE/ --create-empty-src-dirs --links --stats 10s --transfers 16 --drive-chunk-size 32M --checkers 32 --fast-list --exclude-from $SCRIPT_DIR/sync-exceptions-default --exclude-from $SCRIPT_DIR/$SYNC_EXCEPTIONS_CUSTOM_FILENAME $*
+        /usr/local/bin/rclone sync "$LOCAL_PATH" $REMOTE_NAME:$REMOTE_PATH/ --backup-dir gdrive-backup:REMOTE_PATH-$DATE/ --create-empty-src-dirs --links --stats 10s --transfers 16 --drive-chunk-size 32M --checkers 32 --fast-list --exclude-from $SYNC_EXCEPTIONS_FILENAME --exclude-from $CUSTOM_SYNC_EXCEPTIONS_FILENAME $*
 
         # Exit if rclone returned an error
         #[ $? -ne 0 ] && exit $?
