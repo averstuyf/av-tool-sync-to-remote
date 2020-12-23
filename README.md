@@ -64,6 +64,15 @@ By making a shallow clone of the git repository (using `--depth 1`), only the mo
 git clone --depth 1 https://github.com/averstuyf/av-tool-sync-to-remote.git /Users/Shared/av-tool-sync-to-remote/
 ```
 
+In the future update the clone, overwriting any local changes.
+
+```sh
+cd /Users/Shared/av-tool-sync-to-remote
+git fetch
+git reset --hard origin/master
+git clean -f
+```
+
 Make a symlink to the [launchd agent config](https://manpagez.com/man/5/launchd.plist/) file in `/Library/LaunchAgents` for all users or `~/Library/LaunchAgents` for a specific user.
 
 ```sh
