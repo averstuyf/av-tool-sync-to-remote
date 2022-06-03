@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../../../Shared/av-tool-sync-to-remote"
 		}
 	]
 }
