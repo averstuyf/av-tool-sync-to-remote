@@ -72,8 +72,8 @@ perform_backup () {
         # Dedupe first as 
         # 1. Google Drive supports multiple files with the same name co-existing
         # 2. Rclone sees duplicate files as errors during sync
-        rclone dedupe $REMOTE_NAME:$REMOTE_PATH/ --fast-list --dedupe-mode oldest $*
-        rclone sync "$LOCAL_PATH" $REMOTE_NAME:$REMOTE_PATH/ --backup-dir gdrive-backup:$REMOTE_NAME/$REMOTE_PATH-$DATE/ --create-empty-src-dirs --links --stats 10s --transfers 16 --drive-chunk-size 32M --checkers 32 --fast-list --exclude-from $SYNC_EXCEPTIONS_FILENAME --exclude-from $CUSTOM_SYNC_EXCEPTIONS_FILENAME $*
+        rclone dedupe $REMOTE_NAME:$REMOTE_PATH --fast-list --dedupe-mode oldest $*
+        rclone sync "$LOCAL_PATH" $REMOTE_NAME:$REMOTE_PATH --backup-dir $REMOTE_NAME:$REMOTE_PATH-$DATE/ --create-empty-src-dirs --links --stats 10s --transfers 16 --drive-chunk-size 32M --checkers 32 --fast-list --exclude-from $SYNC_EXCEPTIONS_FILENAME --exclude-from $CUSTOM_SYNC_EXCEPTIONS_FILENAME $*
 
         # Exit if rclone returned an error
         #[ $? -ne 0 ] && exit $?
@@ -113,7 +113,7 @@ else # Non-interactive
     echo "Switch to non-interactive mode"
 
     # Guard against running on battery power
-    IS_AC_POWER = $(pmset -g ps | grep -c 'AC Power') # Power: 0 is battery; 1 is charger
+    IS_AC_POWER=$(pmset -g ps | grep -c 'AC Power') # Power: 0 is battery; 1 is charger
     if [ $IS_AC_POWER -eq 0 ] ; then
         echo "Device on battery - exit.\n"
         exit 0
