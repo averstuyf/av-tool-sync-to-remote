@@ -54,7 +54,11 @@ Choose the following options for Google Drive:
 
 Use the command `help` to see an overview of available commands and flags.
 
-### Schedule as a launchd agent
+### Schedule using the launchd agent
+
+Launchd is the recommended scheduling agent for MacOS.
+
+> When called by Launchd, rclone seems unable to access protected folders such as Desktop and Documents. User created folders, with identical user, group and rights do not suffer this problem. My request for assistance through the rclone forum, has been met with no response. See [Schedule using Cront](#schedule-using-cron) for a solution without this limitation.
 
 > When the computer is running on battery power, no scheduled sync takes place, unless forced by providing the `backup` command.
 
@@ -72,7 +76,6 @@ In the future update the clone, overwriting any local changes.
 cd /Users/Shared/av-tool-sync-to-remote
 git fetch
 git reset --hard origin/master
-git clean -f
 ```
 
 Make a symlink to the [launchd agent config](https://manpagez.com/man/5/launchd.plist/) file in `/Library/LaunchAgents` for all users or `~/Library/LaunchAgents` for a specific user.
@@ -92,6 +95,20 @@ See script output and errors.
 ```sh
 cat /tmp/sync-to-remote.stdout
 cat /tmp/sync-to-remote.stderr
+```
+
+### Schedule using Cron
+
+Edit the crontab config file using nano. 
+
+```sh
+export VISUAL=nano; crontab -e
+```
+
+To run the script every 12 hours, add the following line. The `&&` instead of `;` prevents the script from being executed if the `cd` command fails.
+
+```cron
+0 0/12 * * * cd /Users/Shared/av-tool-sync-to-remote && /Users/Shared/av-tool-sync-to-remote/sync-to-remote.sh
 ```
 
 ## License
