@@ -10,6 +10,15 @@
     <string>/Users/Shared/av-tool-sync-to-remote/sync-to-remote.sh</string>
   </array>
 
+  <key>RootDirectory</key>
+  <string>/Users/Shared/av-tool-sync-to-remote</string>
+
+  <key>UserName></key> 
+  <string>arnaud</string> 
+
+  <key>GroupName</key> 
+  <string>wheel</string>
+
   <key>EnvironmentVariables</key>
   <dict>
       <key>PATH</key>
@@ -17,7 +26,7 @@
   </dict>
 
   <key>StartInterval</key>
-  <integer>43200</integer>
+  <integer>60</integer>
 
   <key>StandardOutPath</key>
   <string>/tmp/sync-to-remote.stdout</string>
@@ -29,6 +38,6 @@
   <integer>19</integer>
 
   <key>ProcessType</key>
-  <string>Background</string>
+  <string>Adaptive</string>
 </dict>
 </plist>
